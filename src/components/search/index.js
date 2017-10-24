@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import linkstate from 'linkstate';
 
 class Search extends Component {
+  state = {
+    query: ''
+  }
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    this.props.onSearch(this.state.query);
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleFormSubmit}>
         <div className="input-group">
-          <input type="text" className="form-control" placeholder="Search for..." aria-label="Search for..." />
+          <input value={this.state.query} onChange={linkstate(this, 'query')} type="text" className="form-control" placeholder="Search for..." aria-label="Search for..." />
           <span className="input-group-btn">
             <button className="btn btn-secondary" type="submit">
               Search

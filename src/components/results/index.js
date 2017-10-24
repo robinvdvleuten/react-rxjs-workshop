@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-const Result = () => (
+const Result = props => (
   <li className="card mb-3">
-    <div class="card-body">
-      <h4 class="card-title">
-        Card title
+    <div className="card-body">
+      <h4 className="card-title">
+        {props.result.title}
       </h4>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk of the card's content.
+      <p className="card-text">
+        {props.result.text}
       </p>
     </div>
   </li>
@@ -15,9 +15,11 @@ const Result = () => (
 
 class Results extends Component {
   render() {
+    const { results } = this.props;
+
     return (
       <ul className="list-unstyled">
-        <Result />
+        {results.map((result, i) => <Result key={i} result={result} />)}
       </ul>
     );
   }
